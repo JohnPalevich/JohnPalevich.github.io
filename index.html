@@ -10,13 +10,18 @@
 				alert("something must be filled out");
 				return false;
 			}
-			document.getElementById("answer").innerHTML = xLower + " " + xHigher + " " + derivative;
+			var fn = makeFunction(derivative);
+			document.getElementById("answer").innerHTML = xLower + " " + xHigher + " " + derivative + fn(xLower);
 		}
 		function setDefaults(){
 			document.getElementById("xLower").defaultValue = "0";
 			document.getElementById("xHigher").defaultValue = "10";
 			document.getElementById("derivative").defaultValue = "Math.sin(x)";
 		}
+		function makeFunction(s){
+			return eval("function(x){return "+s+";}");
+		}
+			
 	</script>
 	<body onload="setDefaults()">
 		xLower: <input type ="text" id="xLower">
