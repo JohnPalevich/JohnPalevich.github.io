@@ -24,7 +24,7 @@
 			return new Function("x", "{return "+s+";}");
 		}
 		function numIntegrate(func, xLower, xHigher){
-			var step = (xHigher-xLower)/10000;
+			var step = (xHigher-xLower)/1000000;
 			var sum = 0;
 			for(var i = xLower; i < xHigher; i+=step){
 				sum+= func(i) * step;
