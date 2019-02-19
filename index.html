@@ -11,7 +11,9 @@
 				return false;
 			}
 			var fn = makeFunction(derivative);
-			document.getElementById("answer").innerHTML = xLower + " " + xHigher + " " + derivative + fn(xLower);
+			var integral = numIntegrate(fn, xLower, xHigher);
+			document.getElementById("answer").innerHTML = xLower + " " + xHigher + " " + derivative + " " + integral;
+			
 		}
 		function setDefaults(){
 			document.getElementById("xLower").defaultValue = "0";
@@ -20,6 +22,14 @@
 		}
 		function makeFunction(s){
 			return new Function("x", "{return "+s+";}");
+		}
+		function numIntegrate(func, xLower, xHigher){
+			var step = (xHigher-xLower)/10000;
+			var sum = 0;
+			for(int i = xLower; i < xHigher; i+=step){
+				sum+= func(i) * step;
+			}
+			return sum;
 		}
 			
 	</script>
