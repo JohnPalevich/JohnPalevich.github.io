@@ -19,7 +19,7 @@
 			document.getElementById("derivative").defaultValue = "Math.sin(x)";
 		}
 		function makeFunction(s){
-			return eval("function(x){return "+s+";}");
+			return new Function("x", "{return "+s+";}");
 		}
 			
 	</script>
