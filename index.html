@@ -26,7 +26,7 @@
 		function numIntegrate(func, xLower, xHigher){
 			var step = (xHigher-xLower)/10000;
 			var sum = 0;
-			for(int i = xLower; i < xHigher; i+=step){
+			for(var i = xLower; i < xHigher; i+=step){
 				sum+= func(i) * step;
 			}
 			return sum;
