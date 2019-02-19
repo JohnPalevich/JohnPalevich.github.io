@@ -30,6 +30,7 @@
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = integral;
 			drawAxes(ctx);
+			fillArea(fn1,fn2,xLower,xHigher,graphSteps,ctx, "#FF0000");
 			graph(fn1, xLower, xHigher, graphSteps, ctx, "#FF00FF");
 			graph(fn2, xLower, xHigher, graphSteps, ctx, "#00FF00");
 			ctx.restore();
@@ -80,6 +81,19 @@
 			ctx.moveTo(xLower, func(xLower));
 			for(var i = xLower; i < xHigher; i+=step){
 				ctx.lineTo(i, func(i));
+			} 
+			ctx.stroke();
+			ctx.restore();
+		}
+		function fillArea(func1, func2,xLower,xHigher,steps, ctx, c){
+			var step = (xHigher-xLower)/steps;
+			ctx.save();
+			ctx.beginPath();
+			ctx.strokeStyle = c;
+			ctx.lineWidth = 1/scaleX;
+			for(var i = xLower; i < xHigher; i+=step){
+				ctx.moveTo(i, func1(i));
+				ctx.lineTo(i, func2(i));
 			} 
 			ctx.stroke();
 			ctx.restore();
