@@ -2,6 +2,8 @@
 	<script>
 		var myCanvas;
 		var ctx;
+		var scaleX;
+		var scaleY;
 		function validateForm(){
 			var xLower = parseFloat(document.getElementById("xLower").value);
 			var xHigher = parseFloat(document.getElementById("xHigher").value);
@@ -12,8 +14,8 @@
 			
 			var translateX = parseFloat(document.getElementById("translateX").value);
 			var translateY = parseFloat(document.getElementById("translateY").value);
-			var scaleX = parseFloat(document.getElementById("scaleX").value);
-			var scaleY = parseFloat(document.getElementById("scaleY").value);
+			scaleX = parseFloat(document.getElementById("scaleX").value);
+			scaleY = parseFloat(document.getElementById("scaleY").value);
 			if(derivative1 == "" || derivative2 == ""){
 				alert("derivative 1 or 2 something must be filled out");
 				return false;
@@ -33,13 +35,13 @@
 			ctx.restore();
 		}
 		function setDefaults(){
-			document.getElementById("xLower").defaultValue = "0";
-			document.getElementById("xHigher").defaultValue = "10";
+			document.getElementById("xLower").defaultValue = "-5";
+			document.getElementById("xHigher").defaultValue = "5";
 			document.getElementById("derivative1").defaultValue = "Math.sin(x)";
 			document.getElementById("derivative2").defaultValue = "Math.cos(x)";
 			document.getElementById("steps").defaultValue = "1000000";
 			document.getElementById("graphSteps").defaultValue = "300";
-			document.getElementById("translateX").defaultValue = "0";
+			document.getElementById("translateX").defaultValue = "150";
 			document.getElementById("translateY").defaultValue = "150";
 			document.getElementById("scaleX").defaultValue = "30";
 			document.getElementById("scaleY").defaultValue = "-30";
@@ -61,9 +63,9 @@
 			ctx.save();
 			ctx.beginPath();
 			ctx.strokeStyle = "#0000FF";
-			ctx.lineWidth = 1/30;
-			ctx.moveTo(0,0);
-			ctx.lineTo(300, 0);
+			ctx.lineWidth = 1/scaleX;
+			ctx.moveTo(-150,0);
+			ctx.lineTo(150, 0);
 			ctx.moveTo(0,150);
 			ctx.lineTo(0,-150);
 			ctx.stroke();
@@ -74,7 +76,7 @@
 			ctx.save();
 			ctx.beginPath();
 			ctx.strokeStyle = c;
-			ctx.lineWidth = 1/30;
+			ctx.lineWidth = 1/scaleX;
 			ctx.moveTo(xLower, func(xLower));
 			for(var i = xLower; i < xHigher; i+=step){
 				ctx.lineTo(i, func(i));
