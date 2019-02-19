@@ -1,9 +1,9 @@
 <html>
 	<script>
 		function validateForm(){
-			var xLower = document.forms["myForm"]["xLower"].value;
-			var xHigher = document.forms["myForm"]["xHigher"].value;
-			var derivative = document.forms["myForm"]["derivative"].value;
+			var xLower = document.getElementById("xLower").value;
+			var xHigher = document.getElementById("xHigher").value;
+			var derivative = document.getElementById("derivative").value;
 			if(xLower == "" || xHigher == "" || derivative == ""){
 				alert("something must be filled out");
 				return false;
@@ -15,7 +15,7 @@
 		xHigher: <input type ="text" name="xHigher">
 		function: y = <input type ="text" name="derivative">
 		<button onClick=validateForm() type="submit">
-			value="Submit"
+			Submit
 		</button>
 	Answer:
 		<div id="answer">
