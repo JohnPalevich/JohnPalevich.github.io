@@ -17,7 +17,7 @@
 			var fn = makeFunction(derivative);
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = integral;
-			graph(fn, xLower, xHigher, steps, ctx);
+			graph(fn, xLower, xHigher, graphSteps, ctx);
 		}
 		function setDefaults(){
 			document.getElementById("xLower").defaultValue = "0";
