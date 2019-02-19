@@ -5,13 +5,14 @@
 			
 			var xLower = parseFloat(document.getElementById("xLower").value);
 			var xHigher = parseFloat(document.getElementById("xHigher").value);
-			var derivative = document.getElementById("derivative").value;			
+			var derivative = document.getElementById("derivative").value;
+			var steps = parseFloat(document.getElementById("steps").value);
 			if(derivative == ""){
 				alert("something must be filled out");
 				return false;
 			}
 			var fn = makeFunction(derivative);
-			var integral = numIntegrate(fn, xLower, xHigher);
+			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = xLower + " " + xHigher + " " + derivative + " " + integral;
 			
 		}
@@ -19,12 +20,13 @@
 			document.getElementById("xLower").defaultValue = "0";
 			document.getElementById("xHigher").defaultValue = "10";
 			document.getElementById("derivative").defaultValue = "Math.sin(x)";
+			document.getElementById("steps").defaultValue = "1000000";
 		}
 		function makeFunction(s){
 			return new Function("x", "{return "+s+";}");
 		}
-		function numIntegrate(func, xLower, xHigher){
-			var step = (xHigher-xLower)/1000000;
+		function numIntegrate(func, xLower, xHigher, steps){
+			var step = (xHigher-xLower)/steps;
 			var sum = 0;
 			for(var i = xLower; i < xHigher; i+=step){
 				sum+= func(i) * step;
@@ -38,8 +40,9 @@
 		<p/>
 		xHigher: <input type ="text" id="xHigher">
 		<p/>
-		function: y = <input type ="text" id="derivative">
+		function: ∫<input type ="text" id="derivative"> dx
 		<p/>
+		steps: steps = <input type ="text" id="derivative">
 		<button onClick=validateForm() type="submit">
 			Submit
 		</button>
