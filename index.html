@@ -32,7 +32,7 @@
 			document.getElementById("steps").defaultValue = "1000000";
 			document.getElementById("graphSteps").defaultValue = "300";
 			document.getElementById("translateX").defaultValue = "0";
-			document.getElementById("translateY").defaultValue = "5";
+			document.getElementById("translateY").defaultValue = "150";
 			document.getElementById("scaleX").defaultValue = "30";
 			document.getElementById("scaleY").defaultValue = "-30";
 		}
@@ -55,6 +55,11 @@
 				ctx.lineTo(i, func(i));
 			} 
 			ctx.stroke();
+		}
+		function clearCanvas(){
+			var myCanvas = document.getElementById("myCanvas");
+			var ctx = myCanvas.getContext("2d");
+			ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 		}
 	</script>
 	<body onload="setDefaults()">
@@ -82,6 +87,10 @@
 		</div>
 		<p/>
 		<canvas id="myCanvas" width="300" height="300"/>
+		<p/>
+		<button onClick=clearCanvas() type="submit">
+			Clear
+		</button>
 		<p/>
 		By John Palevich
 		<p/>
