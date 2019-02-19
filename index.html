@@ -1,12 +1,14 @@
 <html>
 	<script>
+		var myCanvas;
+		var ctx;
 		function validateForm(){
 			var xLower = parseFloat(document.getElementById("xLower").value);
 			var xHigher = parseFloat(document.getElementById("xHigher").value);
 			var derivative = document.getElementById("derivative").value;
 			var steps = parseFloat(document.getElementById("steps").value);
 			var graphSteps = parseFloat(document.getElementById("graphSteps").value);
-			var myCanvas = document.getElementById("myCanvas");
+			
 			var translateX = parseFloat(document.getElementById("translateX").value);
 			var translateY = parseFloat(document.getElementById("translateY").value);
 			var scaleX = parseFloat(document.getElementById("scaleX").value);
@@ -15,7 +17,6 @@
 				alert("something must be filled out");
 				return false;
 			}
-			var ctx = myCanvas.getContext("2d");
 			ctx.save();
 			ctx.translate(translateX,translateY);
 			ctx.scale(scaleX, scaleY);
@@ -36,6 +37,8 @@
 			document.getElementById("translateY").defaultValue = "150";
 			document.getElementById("scaleX").defaultValue = "30";
 			document.getElementById("scaleY").defaultValue = "-30";
+			myCanvas = document.getElementById("myCanvas");
+			ctx = myCanvas.getContext("2d");
 		}
 		function makeFunction(s){
 			return new Function("x", "{return "+s+";}");
@@ -69,8 +72,6 @@
 			ctx.stroke();
 		}
 		function clearCanvas(){
-			var myCanvas = document.getElementById("myCanvas");
-			var ctx = myCanvas.getContext("2d");
 			ctx.resetTransform();
 			ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 		}
