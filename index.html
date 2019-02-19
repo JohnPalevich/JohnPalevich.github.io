@@ -12,8 +12,8 @@
 				return false;
 			}
 			var ctx = myCanvas.getContext("2d");
-			ctx.scale(30,30);
-			ctx.translate(0,-150);
+			//ctx.scale(30,30);
+			//ctx.translate(0,-150);
 			var fn = makeFunction(derivative);
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = integral;
@@ -39,6 +39,7 @@
 		}
 		function graph(func,xLower,xHigher,steps, ctx){
 			var step = (xHigher -xLower)/steps;
+			ctx.lineWidth = 1;
 			ctx.moveTo(xLower, func(xLower));
 			for(var i = xLower; i < xHigher; i+=step){
 				ctx.lineTo(i, func(i));
