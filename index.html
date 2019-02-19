@@ -5,7 +5,8 @@
 		function validateForm(){
 			var xLower = parseFloat(document.getElementById("xLower").value);
 			var xHigher = parseFloat(document.getElementById("xHigher").value);
-			var derivative = document.getElementById("derivative").value;
+			var derivative1 = document.getElementById("derivative1").value;
+			var derivative2 = document.getElementById("derivative2").value;
 			var steps = parseFloat(document.getElementById("steps").value);
 			var graphSteps = parseFloat(document.getElementById("graphSteps").value);
 			
@@ -13,24 +14,29 @@
 			var translateY = parseFloat(document.getElementById("translateY").value);
 			var scaleX = parseFloat(document.getElementById("scaleX").value);
 			var scaleY = parseFloat(document.getElementById("scaleY").value);
-			if(derivative == ""){
-				alert("something must be filled out");
+			if(derivative1 == "" || derivative2 == ""){
+				alert("derivative 1 or 2 something must be filled out");
 				return false;
 			}
 			ctx.save();
 			ctx.translate(translateX,translateY);
 			ctx.scale(scaleX, scaleY);
+			var derivative = "Math.abs((" + derivative2 + ")- ("+ derivative1 + ))";
 			var fn = makeFunction(derivative);
+			var fn1 = makeFunction(derivative1);
+			var fn2 = makeFunction(derivative2);
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = integral;
 			drawAxes(ctx);
-			graph(fn, xLower, xHigher, graphSteps, ctx);
+			graph(fn1, xLower, xHigher, graphSteps, ctx, "#FF00FF");
+			graph(fn2, xLower, xHigher, graphSteps, ctx, "#00FF00");
 			ctx.restore();
 		}
 		function setDefaults(){
 			document.getElementById("xLower").defaultValue = "0";
 			document.getElementById("xHigher").defaultValue = "10";
-			document.getElementById("derivative").defaultValue = "Math.sin(x)";
+			document.getElementById("derivative1").defaultValue = "Math.sin(x)";
+			document.getElementById("derivative2").defaultValue = "Math.sin(x)";
 			document.getElementById("steps").defaultValue = "1000000";
 			document.getElementById("graphSteps").defaultValue = "300";
 			document.getElementById("translateX").defaultValue = "0";
@@ -63,10 +69,11 @@
 			ctx.stroke();
 			ctx.restore();
 		}
-		function graph(func,xLower,xHigher,steps, ctx){
+		function graph(func,xLower,xHigher,steps, ctx, c){
 			var step = (xHigher-xLower)/steps;
 			ctx.save();
 			ctx.beginPath();
+			ctx.strokeStyle = c;
 			ctx.lineWidth = 1/30;
 			ctx.moveTo(xLower, func(xLower));
 			for(var i = xLower; i < xHigher; i+=step){
@@ -87,7 +94,9 @@
 		<p/>
 		xHigher: <input type ="text" id="xHigher">
 		<p/>
-		function: ∫ <input type ="text" id="derivative"> dx
+		function1: ∫ <input type ="text" id="derivative1"> dx
+		<p/>
+		function2: ∫ <input type ="text" id="derivative2"> dx
 		<p/>
 		steps: δ = <input type ="text" id="steps">
 		<p/>
