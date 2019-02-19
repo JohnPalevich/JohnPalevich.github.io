@@ -7,14 +7,18 @@
 			var steps = parseFloat(document.getElementById("steps").value);
 			var graphSteps = parseFloat(document.getElementById("graphSteps").value);
 			var myCanvas = document.getElementById("myCanvas");
+			var translateX = parseFloat(document.getElementById("translateX").value);
+			var translateY = parseFloat(document.getElementById("translateY").value);
+			var scaleX = parseFloat(document.getElementById("scaleX").value);
+			var scaleY = parseFloat(document.getElementById("scaleY").value);
 			if(derivative == ""){
 				alert("something must be filled out");
 				return false;
 			}
 			var ctx = myCanvas.getContext("2d");
 			ctx.save();
-			ctx.translate(0,-0.5);
-			ctx.scale(30,-30);
+			ctx.translate(translateX,translateY);
+			ctx.scale(scaleX, scaleY);
 			var fn = makeFunction(derivative);
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = integral;
@@ -27,6 +31,10 @@
 			document.getElementById("derivative").defaultValue = "Math.sin(x)";
 			document.getElementById("steps").defaultValue = "1000000";
 			document.getElementById("graphSteps").defaultValue = "300";
+			document.getElementById("translateX").defaultValue = "0";
+			document.getElementById("translateY").defaultValue = "5";
+			document.getElementById("scaleX").defaultValue = "30";
+			document.getElementById("scaleY").defaultValue = "-30";
 		}
 		function makeFunction(s){
 			return new Function("x", "{return "+s+";}");
@@ -59,6 +67,12 @@
 		steps: δ = <input type ="text" id="steps">
 		<p/>
 		graphSteps: δ = <input type ="text" id="graphSteps">
+		<p/>
+		translateX: <input type ="text" id="translateX"> 
+		translateY: <input type ="text" id="translateY">
+		<p/>
+		scaleX: <input type="text" id="scaleX">
+		scaleY: <input type="text" id="scaleY">
 		<button onClick=validateForm() type="submit">
 			Submit
 		</button>
