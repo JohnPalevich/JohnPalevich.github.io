@@ -1,16 +1,24 @@
 <html>
 	<script>
 		function validateForm(){
-			var xLower = document.getElementById("xLower").value;
-			var xHigher = document.getElementById("xHigher").value;
-			var derivative = document.getElementById("derivative").value;
-			if(xLower == "" || xHigher == "" || derivative == ""){
+			
+			
+			var xLower = parseFloat(document.getElementById("xLower").value);
+			var xHigher = parseFloat(document.getElementById("xHigher").value);
+			var derivative = document.getElementById("derivative").value;			
+			if(derivative == ""){
 				alert("something must be filled out");
 				return false;
 			}
 			document.getElementById("answer").innerHTML = xLower + " " + xHigher + " " + derivative;
 		}
+		function setDefaults(){
+			document.getElementById("xLower").defaultValue = "0";
+			document.getElementById("xHigher").defaultValue = "10";
+			document.getElementById("derivative").defaultValue = "Math.sin(x)";
+		}
 	</script>
+	<body onload="setDefaults()">
 		xLower: <input type ="text" id="xLower">
 		<p/>
 		xHigher: <input type ="text" id="xHigher">
@@ -21,7 +29,8 @@
 			Submit
 		</button>
 		<p/>
-	Answer:
+		Answer:
 		<div id="answer">
 		</div>
+	</body>
 </html>
