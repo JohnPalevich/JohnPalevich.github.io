@@ -1,8 +1,6 @@
 <html>
 	<script>
 		function validateForm(){
-			
-			
 			var xLower = parseFloat(document.getElementById("xLower").value);
 			var xHigher = parseFloat(document.getElementById("xHigher").value);
 			var derivative = document.getElementById("derivative").value;
@@ -41,7 +39,6 @@
 		}
 		function graph(func,xLower,xHigher,steps, ctx){
 			var step = (xHigher -xLower)/steps;
-			ctx.scale(width, height)
 			ctx.moveTo(xLower, func(xLower));
 			for(var i = xLower; i < xHigher; i+=step){
 				ctx.lineTo(i, func(i));
