@@ -13,7 +13,7 @@
 			}
 			var ctx = myCanvas.getContext("2d");
 			ctx.scale(30,30);
-			ctx.translate(0,150);
+			ctx.translate(0,-150);
 			var fn = makeFunction(derivative);
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = integral;
