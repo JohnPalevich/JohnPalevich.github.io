@@ -7,20 +7,26 @@
 			var xHigher = parseFloat(document.getElementById("xHigher").value);
 			var derivative = document.getElementById("derivative").value;
 			var steps = parseFloat(document.getElementById("steps").value);
+			var graphSteps = parseFloat(document.getElementById("graphSteps").value);
+			var myCanvas = document.getElementById("myCanvas").value;
 			if(derivative == ""){
 				alert("something must be filled out");
 				return false;
 			}
+			var ctx = myCanvas.getContext("2d");
+			ctx.scale(30,30);
+			ctx.translate(0,150);
 			var fn = makeFunction(derivative);
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
-			document.getElementById("answer").innerHTML = xLower + " " + xHigher + " " + derivative + " " + integral;
-			
+			document.getElementById("answer").innerHTML = integral;
+			graph(fn, xLower, xHigher, steps, ctx);
 		}
 		function setDefaults(){
 			document.getElementById("xLower").defaultValue = "0";
 			document.getElementById("xHigher").defaultValue = "10";
 			document.getElementById("derivative").defaultValue = "Math.sin(x)";
 			document.getElementById("steps").defaultValue = "1000000";
+			document.getElementById("graphSteps").defaultValue = "300";
 		}
 		function makeFunction(s){
 			return new Function("x", "{return "+s+";}");
@@ -33,7 +39,15 @@
 			}
 			return sum;
 		}
-			
+		function graph(func,xLower,xHigher,steps, ctx){
+			var step = (xHigher -xLower)/steps;
+			ctx.scale(width, height)
+			ctx.moveTo(xLower, func(xLower));
+			for(var i = xLower; i < xHigher; i+=step){
+				ctx.lineTo(i, func(i));
+			} 
+			ctx.stroke();
+		}
 	</script>
 	<body onload="setDefaults()">
 		xLower: <input type ="text" id="xLower">
@@ -43,6 +57,8 @@
 		function: ∫ <input type ="text" id="derivative"> dx
 		<p/>
 		steps: δ = <input type ="text" id="steps">
+		<p/>
+		graphSteps: δ = <input type ="text" id="graphSteps">
 		<button onClick=validateForm() type="submit">
 			Submit
 		</button>
@@ -50,6 +66,8 @@
 		Answer:
 		<div id="answer">
 		</div>
+		<p/>
+		<canvas id="myCanvas" width="300" height="300"/>
 		<p/>
 		By John Palevich
 		<p/>
