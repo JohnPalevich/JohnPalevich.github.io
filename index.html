@@ -30,7 +30,7 @@
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
 			document.getElementById("answer").innerHTML = integral;
 			drawAxes(ctx);
-			fillArea(fn1,fn2,xLower,xHigher,graphSteps,ctx, "#FF0000");
+			fillArea(fn1,fn2,xLower,xHigher,graphSteps,ctx, "#E0FFFF");
 			graph(fn1, xLower, xHigher, graphSteps, ctx, "#FF00FF");
 			graph(fn2, xLower, xHigher, graphSteps, ctx, "#00FF00");
 			ctx.restore();
@@ -63,7 +63,7 @@
 		function drawAxes(ctx){
 			ctx.save();
 			ctx.beginPath();
-			ctx.strokeStyle = "#0000FF";
+			ctx.strokeStyle = "#000000";
 			ctx.lineWidth = 1/scaleX;
 			ctx.moveTo(-150,0);
 			ctx.lineTo(150, 0);
