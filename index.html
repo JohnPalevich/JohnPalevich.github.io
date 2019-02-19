@@ -53,6 +53,7 @@
 		}
 		function drawAxes(ctx){
 			ctx.save();
+			ctx.beginPath();
 			ctx.strokeStyle = "#0000FF";
 			ctx.lineWidth = 1/30;
 			ctx.moveTo(0,0);
@@ -63,19 +64,21 @@
 			ctx.restore();
 		}
 		function graph(func,xLower,xHigher,steps, ctx){
-			var step = (xHigher -xLower)/steps;
+			var step = (xHigher-xLower)/steps;
+			ctx.save();
+			ctx.beginPath();
 			ctx.lineWidth = 1/30;
 			ctx.moveTo(xLower, func(xLower));
 			for(var i = xLower; i < xHigher; i+=step){
 				ctx.lineTo(i, func(i));
 			} 
 			ctx.stroke();
+			ctx.restore();
 		}
 		function clearCanvas(){
 			ctx.save();
 			ctx.resetTransform();
-			ctx.fillStyle = "#00FFFF";
-			ctx.fillRect(0, 0, myCanvas.width, myCanvas.height);
+			ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 			ctx.restore();
 		}
 	</script>
