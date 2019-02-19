@@ -12,7 +12,7 @@
 				return false;
 			}
 			var ctx = myCanvas.getContext("2d");
-			//ctx.scale(30,30);
+			ctx.scale(10,10);
 			//ctx.translate(0,-150);
 			var fn = makeFunction(derivative);
 			var integral = numIntegrate(fn, xLower, xHigher, steps);
